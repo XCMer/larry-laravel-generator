@@ -1,4 +1,4 @@
-# Larry, The Laravel Generator
+# Larry, The Laravel Model Generator
 
 Once you design a database, it takes a while to write the schema down, set up the relations, and stuffs like that. Laravel does have Eloquent, a powerful ORM, but the boilterplate code can still get boring.
 
@@ -10,15 +10,18 @@ Laravel does have a couple of code generators, but I wanted to merely create a t
 Following is a sample input file that Larry would accept:
 
     User Post:hm Profile:ho Comment:hm
-        email:string,100:unique -> required|email
+        email:string,100:unique -> required|mail
         password:string,64 -> required
+        timestamps
 
     Post User:bt Comment:hm Tag:hmb
         title:string -> required
         description:text -> required
+        timestamps
 
     Comment User:bt Post:bt
         content:text -> required
+        timestamps
 
     Tag Post:bt
         name:string
@@ -27,6 +30,68 @@ Following is a sample input file that Larry would accept:
 It would then generate the necessary migrations for all tables. You need not specify the foreign keys in your schema, since it will be added automatically as per Laravel's default convention. Also, for `has_many_and_belongs_to` relation, the join table is automatically created for you.
 
 After that, Larry will also generate all the model files, fill the validation details, as well as the relations. All the models extend `Basemodel`, which in turn extends `Eloquent`. This `Basemodel` provides the common functionality amongst all models, like the validation function.
+
+### Example output of the above input
+
+I'm not putting in all the generated files, since that would make this README too long. However, here's one of the generated migration file:
+
+```php
+2013_01_01_131249_create_tags_table.php
+
+<?php
+
+class Create_Tags_Table {
+
+    public function up()
+    {
+        Schema::create('tags', function($table) {
+            $table->increments('id');
+            $table->string('name');
+
+    });
+
+    }
+
+    public function down()
+    {
+        Schema::drop('tags');
+    }
+
+}
+```
+
+Here's one of the generated models:
+
+```php
+Post.php
+
+<?php
+
+class Post extends Basemodel
+{
+    public static $timestamps = true;
+
+    public static $rules = array(
+        'title' => 'required',
+        'description' => 'required',
+
+    );
+
+    public function comments() {
+        return $this->has_many('Comment');
+    }
+
+    public function user() {
+        return $this->belongs_to('User');
+    }
+
+    public function tags() {
+        return $this->has_many_and_belongs_to('Tag');
+    }
+
+
+}
+```
 
 
 ## Running Larry
