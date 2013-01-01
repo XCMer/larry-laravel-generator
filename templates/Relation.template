@@ -1,0 +1,3 @@
+    public function {{RelName}}() {
+        return $this->{{RelType}}('{{ModelName}}');
+    }

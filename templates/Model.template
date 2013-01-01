@@ -1,0 +1,10 @@
+<?php
+
+class {{ModelName}} extends Basemodel
+{
+    public static $rules = array(
+        {{Rules}}
+    );
+
+{{Relations}}
+}

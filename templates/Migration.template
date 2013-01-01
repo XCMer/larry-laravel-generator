@@ -1,0 +1,18 @@
+<?php
+
+class Create_{{TableCname}}_Table {    
+
+    public function up()
+    {
+        Schema::create('{{TableLname}}', function($table) {
+            {{FieldNames}}
+    });
+
+    }    
+
+    public function down()
+    {
+        Schema::drop('{{TableLname}}');
+    }
+
+}
