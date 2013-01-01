@@ -253,7 +253,7 @@ class Field
     public function setValidationRules($rules)
     {
         $ruleArray = array();
-        $ruleArray = explode(',', $rules);
+        $ruleArray = explode('|', $rules);
         $ruleArray = array_map('trim', $ruleArray);
 
         $this->validationRules = $ruleArray;
