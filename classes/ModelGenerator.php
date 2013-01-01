@@ -134,6 +134,24 @@ class ModelGenerator
         // Remove {{Relations}} text
         $template = str_replace('{{Relations}}', '', $template);
 
+        // Set timestamps tot rue or false
+        if ($this->model->getTimestamps())
+        {
+            $template = str_replace(
+                '{{Timestamps}}',
+                'public static $timestamps = true;',
+                $template
+            );
+        }
+        else
+        {
+            $template = str_replace(
+                '{{Timestamps}}',
+                'public static $timestamps = false;',
+                $template
+            );
+        }
+
         // Return the output
         return $template;
     }

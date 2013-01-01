@@ -2,6 +2,8 @@
 
 class {{ModelName}} extends Basemodel
 {
+    {{Timestamps}}
+
     public static $rules = array(
         {{Rules}}
     );
