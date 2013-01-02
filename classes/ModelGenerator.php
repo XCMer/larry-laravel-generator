@@ -26,7 +26,7 @@ class ModelGenerator
     public function __construct($model)
     {
         $this->model = $model;
-        $this->filename = $model->getName() . '.php';
+        $this->filename = strtolower($model->getName()) . '.php';
     }
 
     /**
@@ -36,7 +36,7 @@ class ModelGenerator
     public function getOutput()
     {
         // Get the template file
-        $template = file_get_contents('templates/Model.template');
+        $template = file_get_contents(\Bundle::path('larry') . 'templates/Model.template');
 
         // Set model name
         $template = str_replace(
@@ -178,7 +178,7 @@ class ModelGenerator
      */
     private function getRelationsFunction($name, $type)
     {
-        $template = file_get_contents('templates/Relation.template');
+        $template = file_get_contents(\Bundle::path('larry') . 'templates/Relation.template');
         $modelName = $name;
 
         if ($type == 'has_one' or $type == 'belongs_to')

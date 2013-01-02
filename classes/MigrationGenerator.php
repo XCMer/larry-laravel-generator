@@ -61,7 +61,7 @@ class MigrationGenerator
     public function getOutput()
     {
         // Load the template
-        $template = file_get_contents('templates/Migration.template');
+        $template = file_get_contents(\Bundle::path('larry') . 'templates/Migration.template');
 
         // Put in lowercase table name
         $template = str_replace('{{TableLname}}', $this->lowerTableName, $template);
