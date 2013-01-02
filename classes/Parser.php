@@ -294,11 +294,12 @@ class Parser
 
             // Now to foreign keys
             $thisModelName = $outputArray['name'];
-            if ($relType == 'ho')
+            /*if ($relType == 'ho')
             {
                 $outputArray['foreignKeys'][$thisModelName][] = strtolower($relName) . '_id';
             }
-            else if ($relType == 'hm')
+            else */
+            if ($relType == 'hm' or $relType == 'ho')
             {
                 $outputArray['foreignKeys'][$relName][] = strtolower($thisModelName) . '_id';
             }
