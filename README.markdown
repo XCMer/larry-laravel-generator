@@ -10,7 +10,7 @@ Laravel does have a couple of code generators, but I wanted to merely create a t
 Following is a sample input file that Larry would accept:
 
     User Post:hm Profile:ho Comment:hm
-        email:string,100:unique -> required|mail
+        email:string,100:unique -> required|email
         password:string,64 -> required
         timestamps
 
@@ -96,11 +96,11 @@ class Post extends Basemodel
 
 ## Running Larry
 
-CD into the folder where you've extracted larry, and type the following:
+Install Larry as a bundle inside your "bundles/larry" folder. The folder name has to be "larry." Then create a text file within the root folder of your Laravel installation, and run the following command from there:
 
-    php larry InputFile.txt OutputDirectory
+    php artisan larry::generate input_file.txt
 
-This will take `InputFile.txt` as an input for parsing, and will create a directory called `OutputDirectory` to store all the generated files.
+This will take `input_file.txt` as an input for parsing, and will write all migrations and models to your application folder. **Larry won't ask you before overwriting models! So use with caution.**
 
 
 ## Documentation
@@ -179,7 +179,7 @@ Well, that's all Larry does for now. But it is a **huge** time saver.
 
 Since Larry is still young, he does have a couple of limitations:
 
-1. Larry only generates migrations and models, with relations and validations. Controllers, views, and anything else is not supported.
+1. Larry only generates migrations and models, with relations and validations. Controllers, views, and anything else is not supported. (And I'm not planning on adding them, since we already have good generators for that)
 
 2. The parser and the generator are pretty dumb. They won't validate whether a validation rule or a field that you used is valid or not.
 
