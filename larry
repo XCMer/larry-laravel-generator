@@ -2,7 +2,8 @@
 
 function autoload($classname)
 {
-    include dirname(__FILE__) . '/classes/' . $classname . '.php';
+    $parts = explode('\\', $classname);
+    include dirname(__FILE__) . '/classes/' . end($parts) . '.php';
 }
 spl_autoload_register('autoload');
 
@@ -15,7 +16,7 @@ if (count($argv) <= 2)
 $inputFilename = $argv[1];
 $outputDirname = $argv[2];
 
-$parser = new Parser($inputFilename);
+$parser = new Larry\Parser($inputFilename);
 $models = $parser->getModels();
 $relationalModels = $parser->getRelationModels();
 
@@ -27,7 +28,7 @@ mkdir($outputDirname . '/models');
 // Write model migrations
 foreach ($models as $model)
 {
-    $migration = new MigrationGenerator($model);
+    $migration = new Larry\MigrationGenerator($model);
     file_put_contents(
         $outputDirname . '/migrations/' . $migration->getFilename(),
         $migration->getOutput()
@@ -39,7 +40,7 @@ foreach ($models as $model)
 // Write relation model migrations
 foreach ($relationalModels as $model)
 {
-    $migration = new MigrationGenerator($model);
+    $migration = new Larry\MigrationGenerator($model);
     file_put_contents(
         $outputDirname . '/migrations/' . $migration->getFilename(),
         $migration->getOutput()
@@ -51,7 +52,7 @@ foreach ($relationalModels as $model)
 // Write model files
 foreach ($models as $model)
 {
-    $modelGenerator = new ModelGenerator($model);
+    $modelGenerator = new Larry\ModelGenerator($model);
     file_put_contents(
         $outputDirname . '/models/' . $modelGenerator->getFilename(),
         $modelGenerator->getOutput()

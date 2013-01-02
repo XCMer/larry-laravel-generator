@@ -1,4 +1,5 @@
 <?php
+namespace Larry;
 
 /**
  * Represent a database model

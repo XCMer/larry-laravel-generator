@@ -1,4 +1,5 @@
 <?php
+namespace Larry;
 
 /**
  * Generate content for the migration file from the model

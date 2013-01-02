@@ -1,4 +1,5 @@
 <?php
+namespace Larry;
 
 /**
  * Represent a field of a model

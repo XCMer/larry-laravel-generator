@@ -1,5 +1,5 @@
 <?php
-
+namespace Larry;
 /**
  * Represents a model for many-many link table, incorporating functions
  * only needed by the MigrationGenerator

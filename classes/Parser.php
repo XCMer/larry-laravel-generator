@@ -1,4 +1,5 @@
 <?php
+namespace Larry;
 
 /**
  * Parse an input text file and create the necessary data structure
@@ -37,7 +38,7 @@ class Parser
     /**
      * Parse the file and create the necessary model/migration objects
      * @param $contents string
-     * @throws Exception
+     * @throws \Exception
      */
     private function parse($contents)
     {
@@ -88,7 +89,7 @@ class Parser
                 // Exception if no model defined
                 if (is_null($currentModel))
                 {
-                    throw new Exception("Syntax error on Line {$currentLineNumber}. Fields specified, but no model.");
+                    throw new \Exception("Syntax error on Line {$currentLineNumber}. Fields specified, but no model.");
                 }
 
                 if (trim($line) == 'timestamps')
@@ -177,7 +178,7 @@ class Parser
      * Given a line, create a complete field object from it
      * @param $line string
      * @return Field
-     * @throws Exception
+     * @throws \Exception
      */
     private function getFieldFromLine($line)
     {
@@ -224,7 +225,7 @@ class Parser
             }
             else
             {
-                throw New Exception('Unknown field ' . $property);
+                throw New \Exception('Unknown field ' . $property);
             }
         }
 
@@ -242,7 +243,7 @@ class Parser
      * Get model data from the given line describing the model
      * @param $line string
      * @return array
-     * @throws Exception
+     * @throws \Exception
      *
      * Should return
      * 1. 'name' => string name
@@ -289,7 +290,7 @@ class Parser
             }
             else
             {
-                throw new Exception('Undefined relation ' . $relType);
+                throw new \Exception('Undefined relation ' . $relType);
             }
 
             // Now to foreign keys

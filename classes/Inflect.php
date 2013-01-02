@@ -1,4 +1,6 @@
 <?php
+namespace Larry;
+
 // Source: http://kuwamoto.org/2007/12/17/improved-pluralizing-in-php-actionscript-and-ror/
 // Thanks to http://www.eval.ca/articles/php-pluralize (MIT license)
 //           http://dev.rubyonrails.org/browser/trunk/activesupport/lib/active_support/inflections.rb (MIT license)

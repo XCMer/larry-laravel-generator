@@ -1,4 +1,5 @@
 <?php
+namespace Larry;
 
 /**
  * Generate the content for the model file
