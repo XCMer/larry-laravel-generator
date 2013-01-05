@@ -26,6 +26,11 @@ class Parser
     private $foreignKeys = array();
 
     /**
+     * Current line number that is being parsed
+     */
+    private $currentLineNumber = 0;
+
+    /**
      * Initialize the parser with the filename/filepath
      * @param $file string
      */
@@ -71,12 +76,11 @@ class Parser
 
         /** @var $currentModel Model */
         $currentModel = null;
-        $currentLineNumber = 0;
 
         foreach (explode("\n", $contents) as $line) // Parse each line
         {
             // Increment current line number
-            $currentLineNumber++;
+            $this->currentLineNumber++;
 
             if (trim($line) == '')
             {
@@ -89,7 +93,7 @@ class Parser
                 // Exception if no model defined
                 if (is_null($currentModel))
                 {
-                    throw new \Exception("Syntax error on Line {$currentLineNumber}. Fields specified, but no model.");
+                    $this->throwParseError("Field specified, but no model created yet.");
                 }
 
                 if (trim($line) == 'timestamps')
@@ -169,6 +173,10 @@ class Parser
         {
             foreach ($fks as $fk)
             {
+                if (!isset($this->models[$modelName]))
+                {
+                    $this->throwParseError('Model "' . $modelName . '" referenced in a relation, but not defined.');
+                }
                 $this->models[$modelName]->addField(new Field($fk, 'integer'));
             }
         }
@@ -187,6 +195,12 @@ class Parser
 
         // Parse the field name, params, and properties
         $fieldDetails = explode(':', trim($parts[0]));
+
+        // If field details doesn't have at least two elements, then it's an error
+        if (count($fieldDetails) < 2)
+        {
+            $this->throwParseError('Field type not specified.');
+        }
 
         // Actual field details
         $name = trim($fieldDetails[0]);
@@ -225,7 +239,7 @@ class Parser
             }
             else
             {
-                throw New \Exception('Unknown field ' . $property);
+                $this->throwParseError('Unknown field type: ' . $property);
             }
         }
 
@@ -290,7 +304,7 @@ class Parser
             }
             else
             {
-                throw new \Exception('Undefined relation ' . $relType);
+                $this->throwParseError('Undefined relation: ' . $relType);
             }
 
             // Now to foreign keys
@@ -326,5 +340,14 @@ class Parser
     public function getRelationModels()
     {
         return $this->relModels;
+    }
+
+    /**
+     * Show the parse error message with the current line number and die
+     */
+    private function throwParseError($message)
+    {
+        echo "[Line No. {$this->currentLineNumber}] {$message}\n";
+        die();
     }
 }
