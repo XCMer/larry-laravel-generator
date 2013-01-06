@@ -10,7 +10,7 @@ Laravel does have a couple of code generators, but I wanted to merely create a t
 Following is a sample input file that Larry would accept:
 
     User Post:hm Profile:ho Comment:hm
-        email:string,100:unique -> required|email
+        email:string,100:unique -> required|mail
         password:string,64 -> required
         timestamps
 
@@ -25,6 +25,10 @@ Following is a sample input file that Larry would accept:
 
     Tag Post:bt
         name:string
+
+    Profile User:bt
+        address:string
+        telephone:string
 
 
 It would then generate the necessary migrations for all tables. You need not specify the foreign keys in your schema, since it will be added automatically as per Laravel's default convention. Also, for `has_many_and_belongs_to` relation, the join table is automatically created for you.
