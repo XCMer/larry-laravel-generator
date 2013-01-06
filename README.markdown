@@ -4,6 +4,14 @@ Once you design a database, it takes a while to write the schema down, set up th
 
 Laravel does have a couple of code generators, but I wanted to merely create a text file with table information, relations, validations, and have it generate all the necessary `migration` and `model` code. You can then start writing controllers immediately to take advantage of this pre-setup.
 
+### Latest Version
+
+The latest version is currently 1.1. Please use `php artisan larry::version` to find the current version. If this command doesn't work, then you have 1.0.
+
+The features in this release are:
+- Parser has been made more intelligent with error handling
+- A version system has been added to get the current version of Larry
+
 
 ## How does "Larry" work?
 
@@ -97,6 +105,25 @@ class Post extends Basemodel
 }
 ```
 
+## Installation
+
+It's recommended that you install Larry via artisan. You can view Larry on Bundles here:http://bundles.laravel.com/bundle/larry/
+
+And here's the command:
+
+    php artisan bundle:install larry
+
+Also, add Larry to your `application/bundles.php` as follows:
+
+    return array(
+
+    	'docs' => array('handles' => 'docs'),
+        'larry',
+
+    );
+
+The `docs` comes as a default, so you just need to add `larry` to the array with whatever is already there.
+
 
 ## Running Larry
 
@@ -105,6 +132,15 @@ Install Larry as a bundle inside your "bundles/larry" folder. The folder name ha
     php artisan larry::generate input_file.txt
 
 This will take `input_file.txt` as an input for parsing, and will write all migrations and models to your application folder. **Larry won't ask you before overwriting models! So use with caution.**
+
+
+## Finding Larry's Version
+
+This feature is available in 1.1 only. You can type:
+
+    php artisan larry::version
+
+It will give you the current version, it's release date, as well as details on all past releases.
 
 
 ## Documentation
