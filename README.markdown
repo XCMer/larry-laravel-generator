@@ -162,7 +162,7 @@ Related models can be optionally specified in the `<Related Model>:<Relation>` f
     bt: Belongs to
     hmb: Has many and belongs to
 
-Foreign keys are added automatically wherever appropriate. Also, Larry knows in which table to create the foreign key. Relation of `has_one` creates a foreign key in the same table, while that of `belongs_to` creates a foreign key in the related table. Also, the `link table` for `has_many_and_belongs_to` is automatically created.
+Foreign keys are added automatically wherever appropriate. Also, Larry knows in which table to create the foreign key. The `link table` for `has_many_and_belongs_to` is automatically created.
 
 
 ### 2. Field definitions
