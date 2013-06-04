@@ -1,3 +1,7 @@
+### Larry Four Released
+
+Please see <a href="https://github.com/XCMer/larry-four-generator">Larry Four</a> for the newer version of Larry, re-written from scratch for Laravel 4.
+
 # Larry, The Laravel Model Generator
 
 Once you design a database, it takes a while to write the schema down, set up the relations, and stuffs like that. Laravel does have Eloquent, a powerful ORM, but the boilterplate code can still get boring.
